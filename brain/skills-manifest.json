@@ -1,0 +1,91 @@
+{
+  "version": "0.1.0",
+  "purpose": "Canonical capability registry for the DESIGNER brain",
+  "domains": {
+    "product_ux": [
+      "product-design",
+      "ux-architecture",
+      "information-architecture",
+      "user-research",
+      "usability-testing",
+      "ux-heuristics",
+      "product-thinking",
+      "product-architecture",
+      "systems-thinking",
+      "workflow-architecture",
+      "ai-product-architecture",
+      "human-controlled-automation"
+    ],
+    "visual_brand": [
+      "graphic-design",
+      "visual-design",
+      "high-end-visual-design",
+      "brandkit",
+      "branding-identity",
+      "creative-direction",
+      "art-direction",
+      "typography",
+      "typography-audit",
+      "minimalist-ui",
+      "reference-analysis",
+      "visual-taste",
+      "digital-art-direction"
+    ],
+    "ui_interaction": [
+      "ui-design",
+      "interface-design",
+      "design-system",
+      "accessibility-review",
+      "ui-animation",
+      "interaction-design",
+      "motion-design",
+      "web-design-guidelines",
+      "design-critique",
+      "design-qa"
+    ],
+    "figma": [
+      "figma-use",
+      "figma-use-figjam",
+      "figma-generate-design",
+      "figma-generate-library",
+      "figma-create-design-system-rules",
+      "figma-design-to-code",
+      "figma-implement-design",
+      "figma-production",
+      "design-handoff",
+      "design-md"
+    ],
+    "implementation": [
+      "design-taste-frontend",
+      "gpt-taste",
+      "redesign-existing-projects",
+      "image-to-code",
+      "imagegen-frontend-web",
+      "imagegen-frontend-mobile",
+      "implementation-awareness",
+      "frontend-aware-ux",
+      "vercel-react-best-practices",
+      "playwright",
+      "build-awwwards-quality-sites"
+    ]
+  },
+  "required_skill_contract": {
+    "files": [
+      "SKILL.md"
+    ],
+    "sections": [
+      "Purpose",
+      "When to use",
+      "Inputs",
+      "Process",
+      "Decision rules",
+      "Anti patterns",
+      "Quality bar",
+      "Evidence requirements",
+      "Outputs",
+      "Validation checklist"
+    ],
+    "evidence_rule": "Nontrivial factual design rules should link to source records in the brain evidence layer.",
+    "conflict_rule": "When reputable sources disagree, retain both positions with context instead of silently merging them."
+  }
+}
