@@ -28,6 +28,10 @@ The names and IDs above are placeholders, not records already present. The revie
 
 ## Use and learn
 
+Before approval, `review-queue` shows work in dependency order and `review-packet ID` includes the exact record, source/evidence chain, blockers, history and review questions. These commands never submit or approve work. A `ready_for_approval` flag means the current software gates pass, not that source quality has been human-reviewed.
+
+`evaluate SUITE.json` runs a versioned set of proposed retrieval expectations against a consistent database snapshot. Exit 0 means all expectations pass, 1 means failure/invalid input, and 2 means expected knowledge awaits approval. The report distinguishes pass, fail and blocked cases and never modifies confidence. See the [real-source pilot](../pilots/wcag-labels/README.md) for a working intake and suite.
+
 ```powershell
 .\.venv\Scripts\python.exe -m sentinel --db data/live.sqlite3 retrieve "action labels" --domain ui --platform mobile
 .\.venv\Scripts\python.exe -m sentinel --db data/live.sqlite3 use-skill skill_your-skill

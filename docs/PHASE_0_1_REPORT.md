@@ -2,6 +2,8 @@
 
 Date: 2026-09-25. Scope: the three supplied handoff documents plus the user's authorization to complete backend work before frontend.
 
+This is the historical Phase 0/1 checkpoint. For the subsequent real-source intake and current test totals, see the [pilot batch report](reports/2026-09-25-real-source-pilot.md).
+
 ## Outcome
 
 Sentinel now has enforceable contracts and a working local supervised learning cycle. The implementation records attributed knowledge, retrieves it by context, preserves contradictions, learns from reviewed outcomes, and removes outdated guidance while retaining history. Actual synthesis, source evaluation, artifact production and design critique remain human/external activities.
@@ -57,7 +59,7 @@ Verification found and fixed permissive calendar-date checking and a Windows-onl
 
 ## Known limits
 
-- All supplied knowledge is synthetic. There is no real approved design corpus or empirical evidence of improved design quality yet.
+- All supplied knowledge at this checkpoint was synthetic. The later pilot adds unapproved source-grounded drafts; there is still no real approved design corpus or empirical evidence of improved design quality.
 - Reviewer identity and source-origin independence are operator assertions, not authenticated or automatically proven facts.
 - Rights and substantive originality require review; text fields cannot establish them.
 - Lexical retrieval uses exact domain/platform and token overlap; it is not semantic intelligence and needs evaluation on a real corpus.

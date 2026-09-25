@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "id": "source_wai-labels-instructions",
+  "type": "source",
+  "revision": 1,
+  "title": "WAI explanation of SC 3.3.2, Labels or Instructions",
+  "created_at": "2026-09-25T11:10:53Z",
+  "updated_at": "2026-09-25T11:10:53Z",
+  "created_by": "codex-source-intake",
+  "fixture": false,
+  "lifecycle": "draft",
+  "review": null,
+  "review_due_at": "2026-12-25T00:00:00Z",
+  "change_reason": "Original source-grounded pilot draft; human review pending.",
+  "source_type": "publication",
+  "locator": "https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html",
+  "creator": "W3C Web Accessibility Initiative",
+  "publisher": "World Wide Web Consortium (W3C)",
+  "independence_group": "w3c-wcag",
+  "captured_at": "2026-09-25T11:10:53Z",
+  "strength": "secondary",
+  "rights": {
+    "status": "unknown",
+    "note": "Only attributed original paraphrases and source links are stored. No full page or media copy. Reviewer must assess the intended use and applicable W3C terms before setting permitted rights; no legal clearance is asserted."
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "suite_id": "wcag-labels-pilot-v1",
+  "status": "blocked",
+  "judgments": "proposed",
+  "as_of": "2026-09-25T11:19:49.687942Z",
+  "mode": "live",
+  "counts": {
+    "pass": 3,
+    "fail": 0,
+    "blocked": 5
+  },
+  "knowledge_revisions": {
+    "knowledge_web-input-instructions": 1,
+    "knowledge_web-visible-label-name": 1
+  },
+  "cases": [
+    {
+      "id": "speech-name",
+      "status": "blocked",
+      "unavailable_ids": [
+        "knowledge_web-visible-label-name"
+      ],
+      "reason": "Expected guidance or its dependencies are not currently approved; no relevance result claimed."
+    },
+    {
+      "id": "form-instructions",
+      "status": "blocked",
+      "unavailable_ids": [
+        "knowledge_web-input-instructions"
+      ],
+      "reason": "Expected guidance or its dependencies are not currently approved; no relevance result claimed."
+    },
+    {
+      "id": "computed-name",
+      "status": "blocked",
+      "unavailable_ids": [
+        "knowledge_web-visible-label-name"
+      ],
+      "reason": "Expected guidance or its dependencies are not currently approved; no relevance result claimed."
+    },
+    {
+      "id": "both-label-topics",
+      "status": "blocked",
+      "unavailable_ids": [
+        "knowledge_web-visible-label-name",
+        "knowledge_web-input-instructions"
+      ],
+      "reason": "Expected guidance or its dependencies are not currently approved; no relevance result claimed."
+    },
+    {
+      "id": "input-format",
+      "status": "blocked",
+      "unavailable_ids": [
+        "knowledge_web-input-instructions"
+      ],
+      "reason": "Expected guidance or its dependencies are not currently approved; no relevance result claimed."
+    },
+    {
+      "id": "wrong-platform",
+      "status": "pass",
+      "actual_ids": [],
+      "missing_ids": [],
+      "forbidden_hits": [],
+      "unexpected_ids": [],
+      "recall_at_limit": null,
+      "precision_at_limit": null
+    },
+    {
+      "id": "wrong-domain",
+      "status": "pass",
+      "actual_ids": [],
+      "missing_ids": [],
+      "forbidden_hits": [],
+      "unexpected_ids": [],
+      "recall_at_limit": null,
+      "precision_at_limit": null
+    },
+    {
+      "id": "unrelated-query",
+      "status": "pass",
+      "actual_ids": [],
+      "missing_ids": [],
+      "forbidden_hits": [],
+      "unexpected_ids": [],
+      "recall_at_limit": null,
+      "precision_at_limit": null
+    }
+  ],
+  "note": "Tests proposed retrieval expectations only; does not approve knowledge or measure user outcomes."
+}

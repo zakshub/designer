@@ -22,6 +22,8 @@ The demo needs no network or credentials. A persistent demo can use a new path s
 
 Nine strict object schemas; typed references; manual ingestion and review; contextual retrieval with provenance; conflicts and counterevidence; reviewed confidence updates; SQLite persistence and revision history; concurrency checks and backups; expiry, supersession and retirement; Designer/Studio handoff validation.
 
+The [real-source web-label pilot](pilots/wcag-labels/README.md) adds ten unapproved W3C-grounded records, dependency-ordered review packets and eight proposed retrieval checks. `review-queue`, `review-packet` and `evaluate` are read-only operations; pending review remains visibly blocked.
+
 ## Navigation
 
 - [Identity](SENTINEL.md) and [constitution](constitution/README.md)

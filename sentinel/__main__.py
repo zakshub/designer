@@ -7,7 +7,9 @@ import sys
 from collections import Counter
 
 from .engine import Brain
+from .evaluation import evaluate
 from .model import Contracts, Invalid, ROOT, eligible, load_directory, read_json
+from .review import review_packet, review_queue
 from .store import Store
 
 
@@ -53,10 +55,13 @@ def parser():
     validate.add_argument("directory", nargs="?", default=str(ROOT / "examples"))
     sub.add_parser("demo", help="Run a synthetic learning cycle in an empty fixture-mode database")
     sub.add_parser("status")
+    sub.add_parser("review-queue", help="Read-only, dependency-ordered review work")
+    q = sub.add_parser("evaluate", help="Read-only retrieval checks; exit 2 when expected guidance awaits review")
+    q.add_argument("suite", help="JSON evaluation suite")
     sub.add_parser("export", help="Write all current records as JSON to stdout")
     q = sub.add_parser("backup", help="Save a consistent database copy including history; refuses overwrite")
     q.add_argument("destination")
-    for name in ("show", "history", "use-skill"):
+    for name in ("show", "history", "use-skill", "review-packet"):
         q = sub.add_parser(name)
         q.add_argument("id")
     q = sub.add_parser("retrieve")
@@ -86,6 +91,7 @@ def parser():
 def main(argv=None):
     args = parser().parse_args(argv)
     store = None
+    exit_code = 0
     try:
         if args.command == "validate":
             contracts = Contracts()
@@ -97,6 +103,13 @@ def main(argv=None):
             brain, command = Brain(store), args.command
             if command == "demo":
                 result = demo(brain)
+            elif command == "review-queue":
+                result = review_queue(brain)
+            elif command == "review-packet":
+                result = review_packet(brain, args.id)
+            elif command == "evaluate":
+                result = evaluate(brain, read_json(args.suite))
+                exit_code = {"pass": 0, "fail": 1, "blocked": 2}[result["status"]]
             elif command == "status":
                 index = brain.contracts.graph(store.all())
                 result = {"mode": "fixture" if store.fixture_mode else "live", "objects": len(index),
@@ -129,7 +142,7 @@ def main(argv=None):
             elif command == "apply-outcome":
                 result = brain.apply_outcome(args.id, args.actor, args.reason, args.expected)
         print(json.dumps(result, indent=2, ensure_ascii=True, allow_nan=False))
-        return 0
+        return exit_code
     except (Invalid, sqlite3.Error, OSError) as exc:
         print(f"Sentinel: {exc}", file=sys.stderr)
         return 1

@@ -142,12 +142,23 @@ class Contracts:
             raise Invalid("A planned experiment is not a published result")
 
     def publication_gate(self, obj, index, now):
-        self.publish_policy(obj, index)
+        reasons = self.publication_blockers(obj, index, now)
+        if reasons:
+            raise Invalid("; ".join(reasons))
+
+    def publication_blockers(self, obj, index, now):
+        """Explain every current gate without approving or changing an object."""
+        reasons = []
+        try:
+            self.publish_policy(obj, index)
+        except Invalid as exc:
+            reasons.append(str(exc))
         if instant(obj["review_due_at"]) <= instant(now):
-            raise Invalid("Review due date must be in the future")
+            reasons.append("Review due date must be in the future")
         for target_id, _ in links(obj):
             if target_id != obj.get("successor_id") and not eligible(target_id, index, now):
-                raise Invalid(f"Dependency is not current, reviewed guidance: {target_id}")
+                reasons.append(f"Dependency is not current, reviewed guidance: {target_id}")
+        return reasons
 
 
 def links(obj):

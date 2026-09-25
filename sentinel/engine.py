@@ -4,6 +4,7 @@ import copy
 import re
 
 from .model import Contracts, DOMAINS, Invalid, eligible, instant, links, utcnow
+from .review import approval_blockers
 
 
 class Brain:
@@ -107,12 +108,9 @@ class Brain:
                 raise Invalid("Only submitted objects can be reviewed")
             if approve:
                 index = {o["id"]: o for o in self.store.all()}
-                self.contracts.publication_gate(obj, index, self.clock())
-                if obj["type"] == "project-learning":
-                    used = next((h["body"] for h in self.store.history(obj["knowledge_id"])
-                                 if h["revision"] == obj["knowledge_revision"]), None)
-                    if not used or used["lifecycle"] != "published":
-                        raise Invalid("Project outcome must cite a published historical knowledge revision")
+                reasons = approval_blockers(self, obj, index, self.clock())
+                if reasons:
+                    raise Invalid("; ".join(reasons))
             obj["lifecycle"] = "published" if approve else "draft"
             obj["review"] = {"actor": actor, "actor_kind": "fixture" if self.store.fixture_mode else "human",
                              "decision": "approved" if approve else "rejected", "at": self.clock(), "reason": reason}

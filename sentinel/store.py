@@ -42,6 +42,15 @@ class Store:
         self.db.close()
 
     @contextmanager
+    def snapshot(self):
+        """Keep a sequence of read queries on one committed database snapshot."""
+        self.db.execute("BEGIN")
+        try:
+            yield
+        finally:
+            self.db.execute("ROLLBACK")
+
+    @contextmanager
     def transaction(self):
         self.db.execute("BEGIN IMMEDIATE")
         try:

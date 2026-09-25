@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "id": "knowledge_web-input-instructions",
+  "type": "knowledge",
+  "revision": 1,
+  "title": "Form labels and input instructions",
+  "created_at": "2026-09-25T11:10:53Z",
+  "updated_at": "2026-09-25T11:10:53Z",
+  "created_by": "codex-source-intake",
+  "fixture": false,
+  "lifecycle": "draft",
+  "review": null,
+  "review_due_at": "2026-12-25T00:00:00Z",
+  "change_reason": "Original source-grounded pilot draft; human review pending.",
+  "claim": "When a web form asks for information, provide labels or instructions that explain the requested entry; an assistive-technology-only name does not by itself establish sufficient visible guidance.",
+  "domains": [
+    "accessibility",
+    "ui"
+  ],
+  "context": {
+    "audience": "web users",
+    "platform": "web",
+    "task": "Complete a form and understand field requirements",
+    "constraints": [
+      "Content requests user input",
+      "Inspect visible guidance and programmatic naming separately",
+      "Choose detail appropriate to the requested format"
+    ]
+  },
+  "evidence_ids": [
+    "evidence_wcag-labels-instructions",
+    "evidence_wai-instruction-visibility"
+  ],
+  "counterevidence_ids": [],
+  "confidence": 0.65,
+  "confidence_rationale": "Proposed contextual interpretation from the standard and same-origin explanation, awaiting human evaluation.",
+  "trust": "provisional",
+  "limitations": [
+    "No field-position or stylistic template is prescribed.",
+    "Instructions should address the actual task, not add indiscriminate verbosity.",
+    "This narrow check is not a full WCAG assessment."
+  ]
+}

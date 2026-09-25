@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "id": "skill_web-label-audit",
+  "type": "skill",
+  "revision": 1,
+  "title": "Review web labels and naming",
+  "created_at": "2026-09-25T11:10:53Z",
+  "updated_at": "2026-09-25T11:10:53Z",
+  "created_by": "codex-source-intake",
+  "fixture": false,
+  "lifecycle": "draft",
+  "review": null,
+  "review_due_at": "2026-12-25T00:00:00Z",
+  "change_reason": "Original source-grounded pilot draft; human review pending.",
+  "purpose": "Guide a bounded review of visible control labels, accessible names, and requested form input.",
+  "knowledge_ids": [
+    "knowledge_web-visible-label-name",
+    "knowledge_web-input-instructions"
+  ],
+  "inputs": [
+    "Web task, audience and constraints",
+    "Rendered controls and computed accessible names"
+  ],
+  "procedure": [
+    "Retrieve current approved claims and inspect their limitations",
+    "Compare visible wording and names for controls within scope",
+    "Check requested-entry guidance in the rendered form",
+    "Record observations, artifact reference and the exact knowledge revision used"
+  ],
+  "outputs": [
+    "Scoped critique with cited evidence and unresolved findings"
+  ],
+  "quality_checks": [
+    "Separate normative requirements from informative explanation",
+    "Do not claim full WCAG conformance from two checks",
+    "Do not invent testing outcomes",
+    "Use only current approved guidance"
+  ]
+}

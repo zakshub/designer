@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "id": "source_wcag22-20241212",
+  "type": "source",
+  "revision": 1,
+  "title": "WCAG 2.2 Recommendation, 12 December 2024",
+  "created_at": "2026-09-25T11:10:53Z",
+  "updated_at": "2026-09-25T11:10:53Z",
+  "created_by": "codex-source-intake",
+  "fixture": false,
+  "lifecycle": "draft",
+  "review": null,
+  "review_due_at": "2026-12-25T00:00:00Z",
+  "change_reason": "Original source-grounded pilot draft; human review pending.",
+  "source_type": "standard",
+  "locator": "https://www.w3.org/TR/2024/REC-WCAG22-20241212/",
+  "creator": "W3C Accessibility Guidelines Working Group",
+  "publisher": "World Wide Web Consortium (W3C)",
+  "independence_group": "w3c-wcag",
+  "captured_at": "2026-09-25T11:10:53Z",
+  "strength": "primary",
+  "rights": {
+    "status": "unknown",
+    "note": "Only attributed original paraphrases and source links are stored. No full page or media copy. Reviewer must assess the intended use and applicable W3C terms before setting permitted rights; no legal clearance is asserted."
+  }
+}

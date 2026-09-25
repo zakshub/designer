@@ -12,9 +12,11 @@ Updated: 2026-09-25.
 
 ## Final verification
 
-**51/51 tests passed**. All 13 fixtures, nine schemas, the complete CLI learning cycle, the PowerShell wrapper and dependency consistency check passed. Backup recovery and stale-editor concurrency checks passed. See [PHASE_0_1_REPORT.md](PHASE_0_1_REPORT.md).
+**70/70 tests passed** after the real-source pilot batch (19 new tests). The Phase 0/1 baseline, backup/recovery checks and synthetic learning cycle remain passing. All ten new pilot drafts validate. Live evaluation is correctly blocked pending human review; eight proposed checks pass only in the separate simulated fixture test. See the [latest batch report](reports/2026-09-25-real-source-pilot.md) and the earlier [Phase 0/1 report](PHASE_0_1_REPORT.md).
 
 ## Remaining work and frontend decision
+
+Completed next backend batch: real-source W3C pilot (ten unapproved records), read-only reviewer packets/queue, and an eight-case retrieval suite. The persistent local pilot contains ten drafts and zero approved records. Sources, observations and proposed interpretations are recorded separately. All three sources share one origin group. Human review and actual project outcomes remain pending; source intake is not publication.
 
 The implementation specified in the supplied Phase 0/1 handoff and the local supervised cycle is complete and verified. Frontend is not started.
 

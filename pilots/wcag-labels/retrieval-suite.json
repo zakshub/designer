@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.0.0",
+  "id": "wcag-labels-pilot-v1",
+  "purpose": "Proposed exact-result checks for this small pilot. Not an empirical measure of design quality or accessibility compliance.",
+  "judgments": "proposed",
+  "cases": [
+    {
+      "domain": "accessibility",
+      "platform": "web",
+      "limit": 5,
+      "id": "speech-name",
+      "query": "speech",
+      "expected_ids": [
+        "knowledge_web-visible-label-name"
+      ],
+      "forbidden_ids": [
+        "knowledge_web-input-instructions"
+      ]
+    },
+    {
+      "domain": "accessibility",
+      "platform": "web",
+      "limit": 5,
+      "id": "form-instructions",
+      "query": "instructions",
+      "expected_ids": [
+        "knowledge_web-input-instructions"
+      ],
+      "forbidden_ids": [
+        "knowledge_web-visible-label-name"
+      ]
+    },
+    {
+      "domain": "accessibility",
+      "platform": "web",
+      "limit": 5,
+      "id": "computed-name",
+      "query": "computed",
+      "expected_ids": [
+        "knowledge_web-visible-label-name"
+      ],
+      "forbidden_ids": [
+        "knowledge_web-input-instructions"
+      ]
+    },
+    {
+      "domain": "accessibility",
+      "platform": "web",
+      "limit": 5,
+      "id": "both-label-topics",
+      "query": "labels",
+      "expected_ids": [
+        "knowledge_web-visible-label-name",
+        "knowledge_web-input-instructions"
+      ],
+      "forbidden_ids": []
+    },
+    {
+      "domain": "accessibility",
+      "platform": "web",
+      "limit": 5,
+      "id": "input-format",
+      "query": "format",
+      "expected_ids": [
+        "knowledge_web-input-instructions"
+      ],
+      "forbidden_ids": [
+        "knowledge_web-visible-label-name"
+      ]
+    },
+    {
+      "domain": "accessibility",
+      "platform": "native-mobile",
+      "limit": 5,
+      "id": "wrong-platform",
+      "query": "labels",
+      "expected_ids": [],
+      "forbidden_ids": [
+        "knowledge_web-visible-label-name",
+        "knowledge_web-input-instructions"
+      ]
+    },
+    {
+      "domain": "motion",
+      "platform": "web",
+      "limit": 5,
+      "id": "wrong-domain",
+      "query": "labels",
+      "expected_ids": [],
+      "forbidden_ids": [
+        "knowledge_web-visible-label-name",
+        "knowledge_web-input-instructions"
+      ]
+    },
+    {
+      "domain": "accessibility",
+      "platform": "web",
+      "limit": 5,
+      "id": "unrelated-query",
+      "query": "volumetric nebula",
+      "expected_ids": [],
+      "forbidden_ids": [
+        "knowledge_web-visible-label-name",
+        "knowledge_web-input-instructions"
+      ]
+    }
+  ]
+}

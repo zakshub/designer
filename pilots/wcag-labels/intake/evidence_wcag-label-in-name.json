@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evidence_wcag-label-in-name",
+  "type": "evidence",
+  "revision": 1,
+  "title": "Normative visible-label/name relation",
+  "created_at": "2026-09-25T11:10:53Z",
+  "updated_at": "2026-09-25T11:10:53Z",
+  "created_by": "codex-source-intake",
+  "fixture": false,
+  "lifecycle": "draft",
+  "review": null,
+  "review_due_at": "2026-12-25T00:00:00Z",
+  "change_reason": "Original source-grounded pilot draft; human review pending.",
+  "source_id": "source_wcag22-20241212",
+  "evidence_type": "standard",
+  "locator": "https://www.w3.org/TR/2024/REC-WCAG22-20241212/#label-in-name",
+  "observation": "SC 2.5.3 addresses controls with visible text labels: their accessible names must include that displayed wording.",
+  "interpretation": "Compare visible wording with the computed accessible name for controls that meet this criterion's scope.",
+  "scope": "WCAG 2.2 SC 2.5.3, Level A; web controls with labels containing text or images of text.",
+  "method": "Manual inspection of the linked official document and the named section; original paraphrase, no empirical user test.",
+  "limitations": [
+    "This single criterion does not establish complete WCAG conformance.",
+    "No requirement of exact name equality is inferred; inclusion is the normative requirement."
+  ],
+  "captured_at": "2026-09-25T11:10:53Z"
+}
