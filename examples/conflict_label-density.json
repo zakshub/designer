@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "id": "conflict_label-density",
+  "type": "conflict",
+  "revision": 1,
+  "title": "Clarity versus density",
+  "created_at": "2026-09-25T00:00:00Z",
+  "updated_at": "2026-09-25T00:00:00Z",
+  "created_by": "fixture-author",
+  "fixture": true,
+  "lifecycle": "draft",
+  "review": null,
+  "review_due_at": "2099-01-01T00:00:00Z",
+  "change_reason": "Synthetic fixture; no real research or human approval.",
+  "claim_ids": [
+    "knowledge_explicit-labels-mobile",
+    "knowledge_compact-labels-mobile"
+  ],
+  "description": "Explicit labels and compact labels optimize different task constraints.",
+  "status": "open",
+  "resolution": null,
+  "evidence_ids": [
+    "evidence_clear-labels-mobile",
+    "evidence_compact-labels-mobile"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "id": "project-learning_explicit-labels-mobile",
+  "type": "project-learning",
+  "revision": 1,
+  "title": "Simulated project outcome",
+  "created_at": "2026-09-25T00:00:00Z",
+  "updated_at": "2026-09-25T00:00:00Z",
+  "created_by": "fixture-author",
+  "fixture": true,
+  "lifecycle": "draft",
+  "review": null,
+  "review_due_at": "2099-01-01T00:00:00Z",
+  "change_reason": "Synthetic fixture; no real research or human approval.",
+  "knowledge_id": "knowledge_explicit-labels-mobile",
+  "knowledge_revision": 1,
+  "project_context": {
+    "audience": "mobile users",
+    "platform": "mobile",
+    "task": "Identify consequential actions",
+    "constraints": [
+      "Small viewport",
+      "Do not rely on color alone"
+    ]
+  },
+  "decision": "Use explicit labels in the consequential action flow.",
+  "artifact_uri": "https://example.invalid/prototype/mobile-actions",
+  "critique": "Clarity improved in the simulation; long labels need layout testing.",
+  "outcome": "Synthetic scenario meets the identification criterion; wrapping remains unresolved.",
+  "evidence_ids": [
+    "evidence_outcome-mobile"
+  ],
+  "lesson": "Keep clarity while testing the label length against viewport constraints.",
+  "confidence_delta": 0.1,
+  "delta_rationale": "Small proposed increase from one additional simulated observation."
+}

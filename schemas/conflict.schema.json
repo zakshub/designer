@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentinel.local/schemas/conflict.schema.json",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/metadata"
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "resolved",
+              "contextualized"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "resolution": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      }
+    }
+  ],
+  "type": "object",
+  "required": [
+    "claim_ids",
+    "description",
+    "status",
+    "resolution",
+    "evidence_ids"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^conflict_[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "type": {
+      "const": "conflict"
+    },
+    "claim_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^knowledge_[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "minItems": 2,
+      "uniqueItems": true
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "status": {
+      "enum": [
+        "open",
+        "contextualized",
+        "resolved"
+      ]
+    },
+    "resolution": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^evidence_[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "unevaluatedProperties": false
+}

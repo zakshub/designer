@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentinel.local/schemas/reference.schema.json",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/metadata"
+    }
+  ],
+  "type": "object",
+  "required": [
+    "source_id",
+    "use",
+    "mechanism",
+    "context",
+    "originality_note"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^reference_[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "type": {
+      "const": "reference"
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^source_[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "use": {
+      "enum": [
+        "research",
+        "craft-evidence",
+        "historical-context",
+        "counterexample"
+      ]
+    },
+    "mechanism": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "context": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "originality_note": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    }
+  },
+  "unevaluatedProperties": false
+}

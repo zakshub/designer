@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentinel.local/schemas/knowledge.schema.json",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/metadata"
+    }
+  ],
+  "type": "object",
+  "required": [
+    "claim",
+    "domains",
+    "context",
+    "evidence_ids",
+    "counterevidence_ids",
+    "confidence",
+    "confidence_rationale",
+    "trust",
+    "limitations"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^knowledge_[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "type": {
+      "const": "knowledge"
+    },
+    "claim": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "domains": {
+      "$ref": "common.schema.json#/$defs/domains"
+    },
+    "context": {
+      "$ref": "common.schema.json#/$defs/context"
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^evidence_[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "counterevidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^evidence_[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "confidence_rationale": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "trust": {
+      "enum": [
+        "provisional",
+        "canonical"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "unevaluatedProperties": false
+}

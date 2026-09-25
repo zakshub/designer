@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentinel.local/schemas/project-learning.schema.json",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/metadata"
+    }
+  ],
+  "type": "object",
+  "required": [
+    "knowledge_id",
+    "knowledge_revision",
+    "project_context",
+    "decision",
+    "artifact_uri",
+    "critique",
+    "outcome",
+    "evidence_ids",
+    "lesson",
+    "confidence_delta",
+    "delta_rationale"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^project-learning_[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "type": {
+      "const": "project-learning"
+    },
+    "knowledge_id": {
+      "type": "string",
+      "pattern": "^knowledge_[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "knowledge_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "project_context": {
+      "$ref": "common.schema.json#/$defs/context"
+    },
+    "decision": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "artifact_uri": {
+      "type": "string",
+      "format": "uri"
+    },
+    "critique": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "outcome": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^evidence_[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "lesson": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "confidence_delta": {
+      "type": "number",
+      "minimum": -0.2,
+      "maximum": 0.2
+    },
+    "delta_rationale": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    }
+  },
+  "unevaluatedProperties": false
+}

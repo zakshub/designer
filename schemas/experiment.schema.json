@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentinel.local/schemas/experiment.schema.json",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/metadata"
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "completed"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  ],
+  "type": "object",
+  "required": [
+    "knowledge_id",
+    "hypothesis",
+    "method",
+    "success_criteria",
+    "state",
+    "result"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^experiment_[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "type": {
+      "const": "experiment"
+    },
+    "knowledge_id": {
+      "type": "string",
+      "pattern": "^knowledge_[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "hypothesis": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "method": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "success_criteria": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "state": {
+      "enum": [
+        "planned",
+        "completed"
+      ]
+    },
+    "result": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "summary",
+        "evidence_ids",
+        "limitations"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^evidence_[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "unevaluatedProperties": false
+}

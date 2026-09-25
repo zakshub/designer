@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentinel.local/schemas/expert-profile.schema.json",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/metadata"
+    }
+  ],
+  "type": "object",
+  "required": [
+    "name",
+    "domains",
+    "source_ids",
+    "expertise_basis",
+    "philosophy",
+    "limits"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^expert-profile_[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "type": {
+      "const": "expert-profile"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "domains": {
+      "$ref": "common.schema.json#/$defs/domains"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^source_[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "expertise_basis": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "philosophy": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "limits": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "unevaluatedProperties": false
+}

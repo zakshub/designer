@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "domains": [
+    "product-design",
+    "ux",
+    "ui",
+    "graphic-design",
+    "typography",
+    "branding",
+    "digital-art",
+    "creative-direction",
+    "art-direction",
+    "interaction",
+    "motion",
+    "accessibility",
+    "design-systems",
+    "figma",
+    "frontend",
+    "immersive-web",
+    "portfolio-storytelling"
+  ],
+  "object_types": [
+    "source",
+    "evidence",
+    "knowledge",
+    "expert-profile",
+    "skill",
+    "experiment",
+    "project-learning",
+    "conflict",
+    "reference"
+  ]
+}

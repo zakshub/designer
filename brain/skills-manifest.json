@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "execution": "human-or-external-adapter",
+  "skills": [
+    {
+      "id": "skill_review-action-labels",
+      "example": "../examples/skill_review-action-labels.json",
+      "fixture": true,
+      "requires_current_knowledge": true
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentinel.local/schemas/common.schema.json",
+  "$defs": {
+    "metadata": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "id",
+        "type",
+        "revision",
+        "title",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "fixture",
+        "lifecycle",
+        "review",
+        "review_due_at",
+        "change_reason"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z]+(?:-[a-z]+)*_[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "type": {
+          "enum": [
+            "source",
+            "evidence",
+            "knowledge",
+            "expert-profile",
+            "skill",
+            "experiment",
+            "project-learning",
+            "conflict",
+            "reference"
+          ]
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "created_by": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "fixture": {
+          "type": "boolean"
+        },
+        "lifecycle": {
+          "enum": [
+            "draft",
+            "in-review",
+            "published",
+            "stale",
+            "superseded",
+            "retired"
+          ]
+        },
+        "review": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "required": [
+            "actor",
+            "actor_kind",
+            "decision",
+            "at",
+            "reason"
+          ],
+          "properties": {
+            "actor": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "actor_kind": {
+              "enum": [
+                "human",
+                "fixture"
+              ]
+            },
+            "decision": {
+              "enum": [
+                "approved",
+                "rejected"
+              ]
+            },
+            "at": {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "Z$"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          },
+          "additionalProperties": false
+        },
+        "review_due_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "change_reason": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "retention_reason": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "successor_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "lifecycle": {
+                "const": "published"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "review": {
+                "type": "object",
+                "properties": {
+                  "decision": {
+                    "const": "approved"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "lifecycle": {
+                "enum": [
+                  "retired",
+                  "superseded"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "retention_reason"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "lifecycle": {
+                "const": "superseded"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "successor_id"
+            ]
+          }
+        }
+      ]
+    },
+    "domains": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "product-design",
+          "ux",
+          "ui",
+          "graphic-design",
+          "typography",
+          "branding",
+          "digital-art",
+          "creative-direction",
+          "art-direction",
+          "interaction",
+          "motion",
+          "accessibility",
+          "design-systems",
+          "figma",
+          "frontend",
+          "immersive-web",
+          "portfolio-storytelling"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "context": {
+      "type": "object",
+      "required": [
+        "audience",
+        "platform",
+        "task",
+        "constraints"
+      ],
+      "properties": {
+        "audience": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "platform": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "task": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

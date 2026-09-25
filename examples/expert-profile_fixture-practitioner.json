@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "id": "expert-profile_fixture-practitioner",
+  "type": "expert-profile",
+  "revision": 1,
+  "title": "Fictional practitioner",
+  "created_at": "2026-09-25T00:00:00Z",
+  "updated_at": "2026-09-25T00:00:00Z",
+  "created_by": "fixture-author",
+  "fixture": true,
+  "lifecycle": "draft",
+  "review": null,
+  "review_due_at": "2099-01-01T00:00:00Z",
+  "change_reason": "Synthetic fixture; no real research or human approval.",
+  "name": "Fixture practitioner",
+  "domains": [
+    "ui"
+  ],
+  "source_ids": [
+    "source_accessibility-guidance"
+  ],
+  "expertise_basis": "Simulated profile demonstrates provenance requirements.",
+  "philosophy": "Make the intended action clear in its context.",
+  "limits": [
+    "Not a real person or expert endorsement."
+  ]
+}

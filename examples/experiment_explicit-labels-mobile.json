@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "id": "experiment_explicit-labels-mobile",
+  "type": "experiment",
+  "revision": 1,
+  "title": "Simulated label comparison",
+  "created_at": "2026-09-25T00:00:00Z",
+  "updated_at": "2026-09-25T00:00:00Z",
+  "created_by": "fixture-author",
+  "fixture": true,
+  "lifecycle": "draft",
+  "review": null,
+  "review_due_at": "2099-01-01T00:00:00Z",
+  "change_reason": "Synthetic fixture; no real research or human approval.",
+  "knowledge_id": "knowledge_explicit-labels-mobile",
+  "hypothesis": "Clear labels improve consequential action identification.",
+  "method": "Simulated comparison of two mobile prototypes.",
+  "success_criteria": "Identify the intended action without relying on color.",
+  "state": "completed",
+  "result": {
+    "summary": "Synthetic result only: clearer identification with a wrapping tradeoff.",
+    "evidence_ids": [
+      "evidence_outcome-mobile"
+    ],
+    "limitations": [
+      "No real users participated."
+    ]
+  }
+}

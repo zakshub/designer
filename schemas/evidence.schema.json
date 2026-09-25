@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentinel.local/schemas/evidence.schema.json",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/metadata"
+    }
+  ],
+  "type": "object",
+  "required": [
+    "source_id",
+    "evidence_type",
+    "locator",
+    "observation",
+    "interpretation",
+    "scope",
+    "method",
+    "limitations",
+    "captured_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^evidence_[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "type": {
+      "const": "evidence"
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^source_[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "evidence_type": {
+      "enum": [
+        "standard",
+        "research",
+        "expert-statement",
+        "visual-observation",
+        "experiment",
+        "project-outcome",
+        "critique"
+      ]
+    },
+    "locator": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "observation": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "interpretation": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "method": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "captured_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    }
+  },
+  "unevaluatedProperties": false
+}

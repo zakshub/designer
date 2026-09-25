@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evidence_compact-labels-mobile",
+  "type": "evidence",
+  "revision": 1,
+  "title": "Synthetic action-label observation",
+  "created_at": "2026-09-25T00:00:00Z",
+  "updated_at": "2026-09-25T00:00:00Z",
+  "created_by": "fixture-author",
+  "fixture": true,
+  "lifecycle": "draft",
+  "review": null,
+  "review_due_at": "2099-01-01T00:00:00Z",
+  "change_reason": "Synthetic fixture; no real research or human approval.",
+  "source_id": "source_independent-lab",
+  "evidence_type": "experiment",
+  "locator": "Fixture notes, scenario 1",
+  "observation": "Simulated expert users found compact action labels faster in a familiar task.",
+  "interpretation": "Labels may aid this task; applicability requires real testing.",
+  "scope": "Synthetic mobile task only.",
+  "method": "Simulated fixture result; no participant study performed.",
+  "limitations": [
+    "Fictional evidence, unsuitable for real recommendations."
+  ],
+  "captured_at": "2026-09-25T00:00:00Z"
+}
