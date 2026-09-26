@@ -39,4 +39,4 @@ jobs:
       - name: Run backend regression tests
         run: python -m unittest discover -v
       - name: Exercise synthetic learning cycle
-        run: python -m sentinel --db :memory: --fixture-mode demo
+        run: 'python -m sentinel --db :memory: --fixture-mode demo'
