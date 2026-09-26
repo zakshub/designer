@@ -6,6 +6,8 @@ import sqlite3
 import tempfile
 import unittest
 from contextlib import redirect_stdout
+from concurrent.futures import ThreadPoolExecutor
+from threading import Barrier
 from pathlib import Path
 from unittest.mock import patch
 
@@ -119,6 +121,48 @@ class ApiTests(unittest.TestCase):
         schema = self.request("GET", "/v1/openapi.json", "viewer")
         self.assertEqual(schema.status_code, 200)
         self.assertIn("/v1/objects/{object_id}/review", schema.json()["paths"])
+
+    def test_numeric_overflow_and_escaped_surrogates_rejected(self):
+        for payload in (b'{"x":1e999}', b'{"x":-1e999}', b'{"x":"\\ud800"}', b'{"\\udfff":1}'):
+            with self.subTest(payload=payload):
+                response = self.client.post("/v1/auth/login", content=payload, headers={"Content-Type": "application/json"})
+                self.assertEqual(response.status_code, 400)
+                self.assertEqual(response.json()["error"]["code"], "invalid_json")
+
+    def test_revoked_session_between_authentication_and_write_is_rejected(self):
+        original = Brain.ingest
+        def revoke_then_ingest(brain, *args, **kwargs):
+            other = Store(self.path, True)
+            try:
+                with other.transaction():
+                    other.db.execute("UPDATE api_sessions SET revoked=1 WHERE user_id=?", (self.ids["editor"],))
+            finally:
+                other.close()
+            return original(brain, *args, **kwargs)
+        with patch.object(Brain, "ingest", revoke_then_ingest):
+            response = self.request("POST", "/v1/objects", "editor", {"objects": load_directory(ROOT / "examples"), "reason": "Race fixture"})
+        self.assertEqual(response.status_code, 401)
+        store = Store(self.path, True)
+        try:
+            self.assertFalse(store.all())
+            self.assertEqual(store.db.execute("SELECT COUNT(*) FROM history").fetchone()[0], 0)
+        finally:
+            store.close()
+
+    def test_concurrent_edits_have_one_winner(self):
+        self.ingest()
+        headers = self.headers("editor")
+        barrier = Barrier(2)
+        def revise(title):
+            barrier.wait(timeout=10)
+            return self.client.request("PATCH", f"/v1/objects/{SOURCE}", headers=headers,
+                                       json={"expected": 1, "changes": {"title": title}, "reason": "Concurrent fixture"}).status_code
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            results = list(pool.map(revise, ["First edit", "Second edit"]))
+        self.assertEqual(sorted(results), [200, 409])
+        history = self.request("GET", f"/v1/objects/{SOURCE}/history", "viewer").json()["data"]
+        self.assertEqual(len(history), 2)
+        self.assertTrue(all(entry["authentication"]["authenticated"] for entry in history))
 
     def test_backup_restores_accounts_sessions_and_authenticated_history(self):
         self.ingest()

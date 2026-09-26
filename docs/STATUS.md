@@ -13,6 +13,10 @@ Updated: 2026-09-26.
 
 ## Final verification
 
+Latest hardening batch: **104/104 tests passed** on Windows/Python 3.13. Transaction-time session revalidation, malformed-JSON protection and concurrent-edit regressions are complete. CI is configured for Windows/Linux and Python 3.11/3.13 with pinned actions; remote execution is pending an authorized push. See the [hardening report](reports/2026-09-26-backend-hardening.md).
+
+Previous batch verification:
+
 **101/101 tests passed** after the authenticated API batch (31 new tests), including all 70 previous tests. Dependency check and nine-schema/13-fixture validation pass. A real loopback-server smoke check returned healthy and rejected unauthenticated access. The live pilot remains ten drafts with zero eligible records. See the [latest batch report](reports/2026-09-26-authenticated-api.md), [pilot report](reports/2026-09-25-real-source-pilot.md) and earlier [Phase 0/1 report](PHASE_0_1_REPORT.md).
 
 ## Remaining work and frontend decision

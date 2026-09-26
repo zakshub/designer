@@ -14,6 +14,7 @@ class Store:
             Path(path).parent.mkdir(parents=True, exist_ok=True)
         self.db = sqlite3.connect(path, isolation_level=None, timeout=10, check_same_thread=check_same_thread)
         self.audit_context = None
+        self.transaction_guard = None
         self.db.row_factory = sqlite3.Row
         self.db.execute("PRAGMA foreign_keys = ON")
         self.db.executescript("""
@@ -55,6 +56,8 @@ class Store:
     def transaction(self):
         self.db.execute("BEGIN IMMEDIATE")
         try:
+            if self.transaction_guard:
+                self.transaction_guard()
             yield
             self.db.execute("COMMIT")
         except BaseException:

@@ -34,3 +34,5 @@ The [real-source web-label pilot](pilots/wcag-labels/README.md) adds ten unappro
 - [Architecture decision](docs/architecture/ADR-002-executable-backend.md)
 
 A future frontend can call the authenticated local HTTP API. Reviewer accounts, role permissions and authenticated audit history are implemented. External model/Studio execution, automated research and public production deployment remain outside this local prototype.
+
+Backend CI is configured for Windows/Linux on Python 3.11 and 3.13 with locked dependencies, schema validation, regression tests and the synthetic learning demo. The workflow uses read-only permissions and pinned action commits; no deployment or real pilot approval is automated. Remote results are available only after the workflow is pushed and runs.

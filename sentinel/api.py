@@ -2,6 +2,7 @@
 
 import copy
 import json
+import math
 import sqlite3
 import time
 import uuid
@@ -143,7 +144,19 @@ class RequestBoundary:
                 def invalid_number(value):
                     raise ValueError("Non-finite number")
 
-                json.loads(body.decode("utf-8"), object_pairs_hook=pairs, parse_constant=invalid_number)
+                parsed = json.loads(body.decode("utf-8"), object_pairs_hook=pairs, parse_constant=invalid_number)
+                pending = [parsed]
+                while pending:
+                    value = pending.pop()
+                    if isinstance(value, float) and not math.isfinite(value):
+                        raise ValueError("Numeric overflow")
+                    if isinstance(value, str):
+                        value.encode("utf-8")  # Reject unpaired escaped surrogates.
+                    elif isinstance(value, dict):
+                        pending.extend(value.keys())
+                        pending.extend(value.values())
+                    elif isinstance(value, list):
+                        pending.extend(value)
             except (ValueError, UnicodeError, RecursionError):
                 return await error_response(400, "invalid_json", "Request must contain unambiguous finite JSON", request_id)(scope, receive, secure_send)
         delivered = False
@@ -184,6 +197,13 @@ def create_app(database, fixture_mode=False, auth_clock=time.time):
     def current(request: Request, credentials: HTTPAuthorizationCredentials | None = Depends(bearer),
                 store: Store = Depends(connection)):
         principal = Auth(store, auth_clock).authenticate(credentials.credentials if credentials else None)
+        # Recheck after acquiring the SQLite write lock, not just at request entry.
+        # A revocation committed before this transaction must prevent the write.
+        def guard():
+            fresh = Auth(store, auth_clock).authenticate(credentials.credentials)
+            if fresh["role"] != principal["role"]:
+                raise AuthError(403, "forbidden", "Account permissions changed; sign in again")
+        store.transaction_guard = guard
         store.audit_context = {"user_id": principal["id"], "username": principal["username"], "role": principal["role"],
                                "session_id": principal["session_id"], "request_id": request.state.request_id}
         return principal

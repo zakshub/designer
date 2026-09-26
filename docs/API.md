@@ -43,6 +43,8 @@ JSON successes contain `data` and `request_id` (OpenAPI returns the schema direc
 
 Object changes and their authenticated context commit atomically: account ID, username, role, session ID and server request ID. Clients cannot supply an actor. Login, account changes and permission denials have a separate security-event log. Passwords and raw tokens are not stored in these logs.
 
+Authenticated writes recheck session validity after acquiring the database write lock. Revocation committed before that lock prevents the write; a transaction which locked first may complete before a concurrent revocation. Reads authenticate at request entry. Numeric overflow and unpaired escaped Unicode surrogates are rejected as invalid JSON before endpoint handling.
+
 Existing records migrate additively. Older/CLI history explicitly reports `authenticated: false` and `via: local-cli`; the CLI is still a trusted filesystem-owner interface, not an authentication boundary. SQLite owners can modify the database directly; history is not tamper-proof.
 
 Use the runbook's SQLite backup command. Backups contain password hashes and active session hashes as well as records/history: protect them as sensitive files. Restored unexpired sessions remain valid, so choose recovery files carefully and revoke sessions through account controls where needed. JSON export is not a backup.
