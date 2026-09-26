@@ -66,4 +66,4 @@ Backups include records, review history, applied-outcome ledger and database mod
 
 ## Operating boundary
 
-This is a trusted local operator tool. Reviewer identity, source independence, rights, expert authority, critique and actual design fit require honest human evaluation. Local file owners can alter SQLite directly; audit history is not a cryptographic tamper-proof log. Authentication and network transport are required before exposing it to untrusted users.
+The CLI is a trusted local operator tool; its actor names are not authenticated. Use the [authenticated API](API.md) for account-backed reviewer identity and role enforcement. Source independence, rights, expert authority, critique and actual design fit still require honest human evaluation. Local file owners can alter SQLite directly; audit history is not a cryptographic tamper-proof log. Public deployment requires TLS and deployment hardening. Backups of API databases also contain account hashes, sessions and security events and must be protected as sensitive files.

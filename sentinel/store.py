@@ -5,14 +5,15 @@ import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
 
-from .model import Invalid
+from .model import Invalid, NotFound
 
 
 class Store:
-    def __init__(self, path, fixture_mode=False):
+    def __init__(self, path, fixture_mode=False, check_same_thread=True):
         if str(path) != ":memory:":
             Path(path).parent.mkdir(parents=True, exist_ok=True)
-        self.db = sqlite3.connect(path, isolation_level=None, timeout=10)
+        self.db = sqlite3.connect(path, isolation_level=None, timeout=10, check_same_thread=check_same_thread)
+        self.audit_context = None
         self.db.row_factory = sqlite3.Row
         self.db.execute("PRAGMA foreign_keys = ON")
         self.db.executescript("""
@@ -66,7 +67,7 @@ class Store:
     def get(self, object_id):
         row = self.db.execute("SELECT body FROM objects WHERE id=?", (object_id,)).fetchone()
         if row is None:
-            raise Invalid(f"Unknown object: {object_id}")
+            raise NotFound(f"Unknown object: {object_id}")
         return json.loads(row[0])
 
     def save(self, obj, action, actor):
@@ -75,13 +76,23 @@ class Store:
         body = json.dumps(obj, sort_keys=True, allow_nan=False)
         self.db.execute("INSERT INTO objects VALUES (?, ?, ?) ON CONFLICT(id) DO UPDATE SET revision=excluded.revision, body=excluded.body",
                         (obj["id"], obj["revision"], body))
-        self.db.execute("INSERT INTO history (object_id,revision,action,actor,at,reason,body) VALUES (?,?,?,?,?,?,?)",
+        cursor = self.db.execute("INSERT INTO history (object_id,revision,action,actor,at,reason,body) VALUES (?,?,?,?,?,?,?)",
                         (obj["id"], obj["revision"], action, actor, obj["updated_at"], obj["change_reason"], body))
+        if self.audit_context:
+            context = self.audit_context
+            self.db.execute("INSERT INTO api_history_context VALUES(?,?,?,?,?,?)",
+                            (cursor.lastrowid, context["user_id"], context["username"], context["role"],
+                             context["session_id"], context["request_id"]))
 
     def history(self, object_id):
         self.get(object_id)
-        return [{**dict(row), "body": json.loads(row["body"])} for row in self.db.execute(
+        rows = [{**dict(row), "body": json.loads(row["body"])} for row in self.db.execute(
             "SELECT * FROM history WHERE object_id=? ORDER BY revision", (object_id,))]
+        has_auth = self.db.execute("SELECT 1 FROM sqlite_master WHERE name='api_history_context' AND type='table'").fetchone()
+        for row in rows:
+            context = self.db.execute("SELECT * FROM api_history_context WHERE history_sequence=?", (row["sequence"],)).fetchone() if has_auth else None
+            row["authentication"] = {"authenticated": True, "via": "api", **dict(context)} if context else {"authenticated": False, "via": "local-cli"}
+        return rows
 
     def backup(self, destination):
         """Consistent SQLite snapshot, refusing to overwrite any existing path."""

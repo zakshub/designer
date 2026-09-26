@@ -18,6 +18,14 @@ class Invalid(ValueError):
     """A user-facing contract, integrity, or workflow error."""
 
 
+class NotFound(Invalid):
+    """An explicitly requested object does not exist."""
+
+
+class Conflict(Invalid):
+    """The requested write conflicts with persisted state."""
+
+
 def utcnow():
     return datetime.now(timezone.utc).isoformat(timespec="microseconds").replace("+00:00", "Z")
 

@@ -1,6 +1,6 @@
 # Work status
 
-Updated: 2026-09-25.
+Updated: 2026-09-26.
 
 ## Completed implementation
 
@@ -9,10 +9,11 @@ Updated: 2026-09-25.
 - Local supervised backend: manual ingestion, review, contextual retrieval, skill access, conflicts, project outcomes, confidence changes, staleness, correction, supersession and retirement.
 - Durable memory: SQLite transactions, historical snapshots, expected-revision checks, outcome deduplication, backups and recovery workflow.
 - Synthetic acceptance: a complete learning cycle with explicit simulated reviews and provenance; no claim of real research validation.
+- Authenticated local API: login, four role levels, account/session management, ingestion/review/retrieval/evaluation endpoints, atomic authenticated history, additive migration and recovery verification.
 
 ## Final verification
 
-**70/70 tests passed** after the real-source pilot batch (19 new tests). The Phase 0/1 baseline, backup/recovery checks and synthetic learning cycle remain passing. All ten new pilot drafts validate. Live evaluation is correctly blocked pending human review; eight proposed checks pass only in the separate simulated fixture test. See the [latest batch report](reports/2026-09-25-real-source-pilot.md) and the earlier [Phase 0/1 report](PHASE_0_1_REPORT.md).
+**101/101 tests passed** after the authenticated API batch (31 new tests), including all 70 previous tests. Dependency check and nine-schema/13-fixture validation pass. A real loopback-server smoke check returned healthy and rejected unauthenticated access. The live pilot remains ten drafts with zero eligible records. See the [latest batch report](reports/2026-09-26-authenticated-api.md), [pilot report](reports/2026-09-25-real-source-pilot.md) and earlier [Phase 0/1 report](PHASE_0_1_REPORT.md).
 
 ## Remaining work and frontend decision
 
@@ -22,7 +23,7 @@ The implementation specified in the supplied Phase 0/1 handoff and the local sup
 
 Before treating Sentinel as a proven design intelligence system, a human must review real sources and exercise it on a real design project. That requires actual source evaluation, artifacts and observed outcomes; simulated records cannot complete it. Evaluate retrieval quality and confidence policy from that pilot.
 
-For a hosted/multi-user product, add authenticated reviewers, an API adapter, permissions, migrations and deployment operations. External Studio/Figma/model adapters and any automated discovery need a separately defined integration target. No such target or later numbered phase plan was supplied.
+The agreed authenticated-backend plan is complete: reviewers, API, permissions, migration, audit and tests. The operator must choose their own administrator password using [API setup](API.md); no live credentials were invented. Public hosting still needs a deployment target, TLS and deployment operations. External Studio/Figma/model adapters and any automated discovery need a separately defined integration target. These are not implemented or silently substituted with mocks.
 
 ## Reporting convention
 

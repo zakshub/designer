@@ -29,7 +29,8 @@ The [real-source web-label pilot](pilots/wcag-labels/README.md) adds ten unappro
 - [Identity](SENTINEL.md) and [constitution](constitution/README.md)
 - [Architecture](brain/architecture.md), [schemas](schemas/README.md), [validation](validation/README.md)
 - [Operator runbook](docs/RUNBOOK.md)
+- [Authenticated API and account setup](docs/API.md)
 - [Completion report](docs/PHASE_0_1_REPORT.md) and [status](docs/STATUS.md)
 - [Architecture decision](docs/architecture/ADR-002-executable-backend.md)
 
-A future frontend can call the Python service methods. Hosted API, authentication, external model/Studio execution, automated research and production deployment remain outside this local prototype.
+A future frontend can call the authenticated local HTTP API. Reviewer accounts, role permissions and authenticated audit history are implemented. External model/Studio execution, automated research and public production deployment remain outside this local prototype.

@@ -3,7 +3,7 @@
 import copy
 import re
 
-from .model import Contracts, DOMAINS, Invalid, eligible, instant, links, utcnow
+from .model import Conflict, Contracts, DOMAINS, Invalid, eligible, instant, links, utcnow
 from .review import approval_blockers
 
 
@@ -17,7 +17,7 @@ class Brain:
 
     def _check_revision(self, obj, expected):
         if obj["revision"] != expected:
-            raise Invalid(f"Revision conflict: expected {expected}, current {obj['revision']}")
+            raise Conflict(f"Revision conflict: expected {expected}, current {obj['revision']}")
 
     def _commit(self, obj, action, actor, reason):
         obj["revision"] += 1
@@ -60,7 +60,7 @@ class Brain:
                 if obj["fixture"] != self.store.fixture_mode:
                     raise Invalid("Fixture/live database mismatch")
                 if obj["id"] in existing_ids:
-                    raise Invalid(f"ID already exists; revise it explicitly: {obj['id']}")
+                    raise Conflict(f"ID already exists; revise it explicitly: {obj['id']}")
                 if obj["lifecycle"] != "draft" or obj["revision"] != 1 or obj["review"] is not None:
                     raise Invalid("Ingestion accepts only new, unreviewed revision-1 drafts")
                 if obj.get("successor_id") or obj.get("retention_reason"):
@@ -151,7 +151,7 @@ class Brain:
             if outcome["type"] != "project-learning":
                 raise Invalid("Only project-learning records can update confidence")
             if self.store.db.execute("SELECT 1 FROM applied_outcomes WHERE outcome_id=?", (outcome_id,)).fetchone():
-                raise Invalid("This outcome has already been applied")
+                raise Conflict("This outcome has already been applied")
             index = {o["id"]: o for o in self.store.all()}
             if not eligible(outcome_id, index, self.clock()):
                 raise Invalid("Outcome and its dependencies must be current and approved")

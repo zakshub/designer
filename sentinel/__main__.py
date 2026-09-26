@@ -1,6 +1,7 @@
 """Run `python -m sentinel --help` for the local backend interface."""
 
 import argparse
+import getpass
 import json
 import sqlite3
 import sys
@@ -55,6 +56,10 @@ def parser():
     validate.add_argument("directory", nargs="?", default=str(ROOT / "examples"))
     sub.add_parser("demo", help="Run a synthetic learning cycle in an empty fixture-mode database")
     sub.add_parser("status")
+    q = sub.add_parser("bootstrap-admin", help="Create the first administrator using a hidden password prompt")
+    q.add_argument("username")
+    q = sub.add_parser("serve", help="Run authenticated API on 127.0.0.1")
+    q.add_argument("--port", type=int, default=8000)
     sub.add_parser("review-queue", help="Read-only, dependency-ordered review work")
     q = sub.add_parser("evaluate", help="Read-only retrieval checks; exit 2 when expected guidance awaits review")
     q.add_argument("suite", help="JSON evaluation suite")
@@ -93,6 +98,14 @@ def main(argv=None):
     store = None
     exit_code = 0
     try:
+        if args.command == "serve":
+            if not 1 <= args.port <= 65535:
+                raise Invalid("Port must be between 1 and 65535")
+            import uvicorn
+            from .api import create_app
+            uvicorn.run(create_app(args.db, args.fixture_mode), host="127.0.0.1", port=args.port,
+                        proxy_headers=False, access_log=False)
+            return 0
         if args.command == "validate":
             contracts = Contracts()
             objects = contracts.graph(load_directory(args.directory))
@@ -103,6 +116,15 @@ def main(argv=None):
             brain, command = Brain(store), args.command
             if command == "demo":
                 result = demo(brain)
+            elif command == "bootstrap-admin":
+                from .auth import Auth, migrate_auth
+                migrate_auth(store)
+                if store.db.execute("SELECT COUNT(*) FROM api_users").fetchone()[0]:
+                    raise Invalid("Administrator bootstrap is already closed")
+                password = getpass.getpass("New administrator password (15-128 characters): ")
+                if password != getpass.getpass("Confirm password: "):
+                    raise Invalid("Passwords do not match")
+                result = Auth(store).create_user(args.username, password, "admin", bootstrap=True)
             elif command == "review-queue":
                 result = review_queue(brain)
             elif command == "review-packet":
