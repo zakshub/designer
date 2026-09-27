@@ -2,6 +2,8 @@
 
 Updated: 2026-09-26.
 
+Remote verification: backend branch commit `c5b507e` passed all four GitHub CI jobs (Windows/Linux, Python 3.11/3.13), [run 36250550990](https://github.com/zakshub/designer/actions/runs/36250550990). Earlier references below to remote CI pending describe the pre-push batch. The original GitHub planning files are preserved under [upstream-baseline](upstream-baseline/RECONCILIATION.md) while reconciling the formerly unrelated histories.
+
 ## Completed implementation
 
 - Phase 0: identity, mission, indefinite-learning definition, evidence/originality policies, quality/review policy and Designer/Studio boundaries.

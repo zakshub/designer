@@ -26,6 +26,8 @@ The [real-source web-label pilot](pilots/wcag-labels/README.md) adds ten unappro
 
 ## Navigation
 
+The [original GitHub planning baseline](docs/upstream-baseline/RECONCILIATION.md) is preserved alongside the implemented contracts, with both Git histories retained.
+
 - [Identity](SENTINEL.md) and [constitution](constitution/README.md)
 - [Architecture](brain/architecture.md), [schemas](schemas/README.md), [validation](validation/README.md)
 - [Operator runbook](docs/RUNBOOK.md)
