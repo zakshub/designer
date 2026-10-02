@@ -24,12 +24,15 @@ Nine strict object schemas; typed references; manual ingestion and review; conte
 
 The [real-source web-label pilot](pilots/wcag-labels/README.md) adds ten unapproved W3C-grounded records, dependency-ordered review packets and eight proposed retrieval checks. `review-queue`, `review-packet` and `evaluate` are read-only operations; pending review remains visibly blocked.
 
+A curated [Brand & Category Visual Intelligence](brain/brand-intelligence/README.md) working module now adds context-aware category priors, evidence-based color reasoning, competitive differentiation, cross-project anti-monotony checks, attributed SMEs/research sources and a mechanism-level case-study bank. It is working intelligence under the existing evidence/review policy, not automatically canonical guidance.
+
 ## Navigation
 
 The [original GitHub planning baseline](docs/upstream-baseline/RECONCILIATION.md) is preserved alongside the implemented contracts, with both Git histories retained.
 
 - [Identity](SENTINEL.md) and [constitution](constitution/README.md)
 - [Architecture](brain/architecture.md), [schemas](schemas/README.md), [validation](validation/README.md)
+- [Brand & Category Visual Intelligence](brain/brand-intelligence/README.md)
 - [Operator runbook](docs/RUNBOOK.md)
 - [Authenticated API and account setup](docs/API.md)
 - [Completion report](docs/PHASE_0_1_REPORT.md) and [status](docs/STATUS.md)
