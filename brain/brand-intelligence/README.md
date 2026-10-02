@@ -27,12 +27,14 @@ The module must not reduce categories to deterministic recipes such as `fintech 
 
 ## Files
 
-- `decision-protocol.md` — how to reason before selecting a visual language
+- `decision-protocol.md` — how to reason before selecting a visual language, including mandatory light/dark companion design
 - `color-intelligence.md` — evidence-based color reasoning and appearance rules
 - `category-priors.md` — category expectations, clichés and questions to investigate
 - `anti-monotony.md` — detects accidental reuse of the same visual formula
 - `experts-and-sources.md` — SMEs, research, design systems and reference libraries
 - `case-study-bank.md` — mechanism-level examples across finance, health, food and fashion/beauty
+- `reference-routing.md` — which source type to use for which design question
+- `project-visual-brief.md` — reusable pre-design worksheet for category scan, references, 3 directions, appearance pairing and anti-monotony review
 
 ## Mandatory output behavior
 
@@ -45,6 +47,8 @@ Before a production direction is accepted, Sentinel should be able to state:
 - how light and dark appearances differ intentionally;
 - which previous project patterns were checked for accidental repetition;
 - what evidence is strong, contextual, practitioner-led or merely inspirational.
+
+For every meaningful production screen or visual direction, create both light and dark companion variants in clearly separated Figma frames/pages unless the product owner explicitly requests one appearance only. The context decides which mode is primary; neither mode is a mechanical inversion of the other.
 
 References are inputs to judgment, never templates to imitate. This module inherits the repository's evidence policy and originality policy.
 
