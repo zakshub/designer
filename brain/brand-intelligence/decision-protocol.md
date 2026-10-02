@@ -82,11 +82,15 @@ Choose color only after determining:
 
 Never justify a color solely with folk psychology such as 'blue means trust'.
 
-## 7. Appearance pairing
+## 7. Appearance pairing — mandatory production rule
 
-If a product supports both light and dark appearances, design them as related systems rather than inversions.
+For every meaningful production screen or visual direction, create both a light and dark companion unless the product owner explicitly requests a single appearance.
 
-For each appearance re-evaluate:
+The context still decides which appearance is primary. A cinematic, media-heavy or low-light experience may be dark-first; a reading, finance, forms or analysis surface may be light-first. The companion mode still has to be designed properly.
+
+Keep light and dark variants in separate clearly named Figma frames or separate pages so they can be compared and reviewed independently.
+
+Do not treat one appearance as a mechanical inversion of the other. For each appearance re-evaluate:
 - canvas and surface hierarchy;
 - text contrast;
 - borders and elevation;
@@ -95,7 +99,8 @@ For each appearance re-evaluate:
 - chart colors;
 - glow and effects;
 - disabled/hover/focus states;
-- artwork contrast and perceived saturation.
+- artwork contrast and perceived saturation;
+- image and art-direction compatibility.
 
 A cinematic dark state may coexist with a highly legible light workspace when product context supports it.
 
